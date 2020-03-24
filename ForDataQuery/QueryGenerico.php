@@ -27,6 +27,7 @@
             	echo json_encode($objectReturn);
             	// permitir peticiones externas
          		header('Access-Control-Allow-Origin: *');
+                Conexion::cerrarConexion();
          		// retornando en json en cuanto el front lo llame
             	header('Content-Type: application/json');
 			} catch (Exception $ex) {
@@ -39,6 +40,7 @@
             	echo json_encode($objectReturn);
             	// permitir peticiones externas
          		header('Access-Control-Allow-Origin: *');
+                Conexion::cerrarConexion();
          		// retornando en json en cuanto el front lo llame
             	header('Content-Type: application/json');
 			}
