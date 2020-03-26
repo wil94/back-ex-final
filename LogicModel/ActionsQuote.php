@@ -10,13 +10,13 @@
 			$conexion = new Conexion();
 			$conexion->abrirConexion();
 
-			// Recibimos las variables por POST
-			$idQuote = substr(sha1(time()), 0, 16);
-			$idVehicle = $_POST['idVehicle'];
-			$typeQuote = $_POST['tipoCompra'];
-			$initial_amount = $_POST['montoInicial'];
-			$time_loan = $_POST['tiempo'];
-			$month_amount = $_POST['pagoMensual'];
+			//Recibimos las variables por GET
+		 	$idQuote = substr(sha1(time()), 0, 16);
+			$idVehicle = $_GET['idVehicle'];
+			$typeQuote = $_GET['tipoCompra'];
+			$initial_amount = $_GET['montoInicial'];
+			$time_loan = $_GET['tiempo'];
+			$month_amount = $_GET['pagoMensual'];
 			// Instanciamos y creamos el objeto Quote
 			$quote = new Quote($idQuote, $idVehicle, $typeQuote, $initial_amount, $time_loan, $month_amount);
 
@@ -29,10 +29,12 @@
 			$monAmount = $quote->getMonthAmount();
 
 			$queryToExecute = " INSERT INTO quote (id_quote, id_vehicle, type, initial_amount, time_loan, month_amount) 
-				VALUES ( '$idQ', '$idV', '$type', $iniAmount, $time, $monAmount ) ";
+			 	VALUES ( '$idQ', '$idV', '$type', $iniAmount, $time, $monAmount ) ";
 
-			$queryData = array();
-			//variable que da formato como un json
+			//$texto = $_SERVER['REQUEST_METHOD'];
+			//$texto = $_SERVER['REQUEST_URI'];
+
+			// variable que da formato como un json
 			$objectReturn = new stdClass();
 
 			try {
@@ -46,9 +48,10 @@
             	echo json_encode($objectReturn);
             	// permitir peticiones externas
          		header('Access-Control-Allow-Origin: *');
+         		//header('Acc')
          		$conexion->cerrarConexion();
          		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
+            	// header('Content-Type: application/json');
 			} catch (Exception $ex) {
 				// print "Error: " . $ex -> getMessage() . "<br>";
 				// die();
@@ -61,7 +64,7 @@
          		header('Access-Control-Allow-Origin: *');
          		$conexion->cerrarConexion();
          		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
+            	// header('Content-Type: application/json');
 			}
 
 		}
