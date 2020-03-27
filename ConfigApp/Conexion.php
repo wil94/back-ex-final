@@ -39,10 +39,6 @@
 			return self::$conexion;
 		}
 
-		public static function TestRetornos(){
-			
-		}
-
 	}
 
 

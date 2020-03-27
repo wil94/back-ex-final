@@ -6,6 +6,7 @@
 
 	//TestingBasic::firstTest();
 	//TestingBasic::jsonTest();
-	TestingBasic::jsonTestAndroid();
+	//TestingBasic::jsonTestAndroid();
+	TestingBasic::receiveDataApp();
 
 ?>

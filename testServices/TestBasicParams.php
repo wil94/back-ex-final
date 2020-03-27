@@ -31,5 +31,24 @@
 
 
         }
+
+        public static function receiveDataApp () {
+            //$a = $_POST['idPrueba'];
+
+            // $JsonDecodeado = json_decode(file_get_contents('php://input'), true);
+            // print_r($JsonDecodeado);
+
+            // // mostrando lo que llego
+            // echo json_encode($JsonDecodeado);
+
+
+            $objectReturn = new stdClass();
+            $objectReturn->correcto = true;
+            $objectReturn->mensaje = "HHHH";
+            //$objectReturn->mensaje = "Respuesta correcta";
+            //$objectReturn->listaResultado = [];
+
+            echo json_encode($objectReturn);
+        }
 	}
  ?>
