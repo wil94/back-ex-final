@@ -1,6 +1,5 @@
 <?php 
 	class ExecuteQuerySQL {
-
 		public static function obtenerDataSQL() {
 		 	include_once "../ConfigApp/Conexion.php";
 			Conexion::abrirConexion();
@@ -9,7 +8,6 @@
 			$queryData = array();
 			//variable que da formato como un json
 			$objectReturn = new stdClass();
-
 			try {
 				$fetchData = Conexion::obtenerConexion()->prepare($queryToExecute);
             	$fetchData->execute();
@@ -17,26 +15,28 @@
             	$objectReturn->correcto = true;
             	$objectReturn->mensaje = "Consulta SQL ejecutada exitosamente";
             	$objectReturn->listaResultado = [];
+                // Las alteraciones de header deben etar antes de cualquier respuesta o salida
+                // permitir peticiones externas
+                header('Access-Control-Allow-Origin: *');
+                // retornando en json en cuanto el front lo llame
+                header('Content-Type: application/json');
             	// volviendo a formato json
             	echo json_encode($objectReturn);
-            	// permitir peticiones externas
-         		header('Access-Control-Allow-Origin: *');
                 Conexion::cerrarConexion();
-         		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
 			} catch (Exception $ex) {
 				// print "Error: " . $ex -> getMessage() . "<br>";
 				// die();
 				$objectReturn->correcto = false;
             	$objectReturn->mensaje = $ex -> getMessage();
             	$objectReturn->listaResultado = [];
-            	// volviendo a formato json
-            	echo json_encode($objectReturn);
-            	// permitir peticiones externas
-         		header('Access-Control-Allow-Origin: *');
+            	// Las alteraciones de header deben etar antes de cualquier respuesta o salida
+                // permitir peticiones externas
+                header('Access-Control-Allow-Origin: *');
+                // retornando en json en cuanto el front lo llame
+                header('Content-Type: application/json');
+                // volviendo a formato json
+                echo json_encode($objectReturn);
                 Conexion::cerrarConexion();
-         		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
 			}
 		}
 	}

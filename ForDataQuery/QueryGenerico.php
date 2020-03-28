@@ -23,26 +23,27 @@
             	$objectReturn->correcto = true;
             	$objectReturn->mensaje = "Consulta SQL ejecutada exitosamente";
             	$objectReturn->listaResultado = $queryData;
+                // Las alteraciones de header deben etar antes de cualquier respuesta o salida
+                // permitir peticiones externas
+                header('Access-Control-Allow-Origin: *');
+                // retornando en json en cuanto el front lo llame
+                header('Content-Type: application/json');
             	// volviendo a formato json
             	echo json_encode($objectReturn);
-            	// permitir peticiones externas
-         		header('Access-Control-Allow-Origin: *');
                 Conexion::cerrarConexion();
-         		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
 			} catch (Exception $ex) {
 				// print "Error: " . $ex -> getMessage() . "<br>";
 				// die();
 				$objectReturn->correcto = false;
             	$objectReturn->mensaje = $ex -> getMessage();
             	$objectReturn->listaResultado = [];
+                // permitir peticiones externas
+                header('Access-Control-Allow-Origin: *');
+                // retornando en json en cuanto el front lo llame
+                header('Content-Type: application/json');
             	// volviendo a formato json
             	echo json_encode($objectReturn);
-            	// permitir peticiones externas
-         		header('Access-Control-Allow-Origin: *');
                 Conexion::cerrarConexion();
-         		// retornando en json en cuanto el front lo llame
-            	header('Content-Type: application/json');
 			}
 		}
 	}
