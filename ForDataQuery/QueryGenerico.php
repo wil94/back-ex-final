@@ -1,6 +1,5 @@
 <?php 
 	class ExecuteQuerySQL {
-
 		public static function obtenerDataSQL() {
 		 	include_once "../ConfigApp/Conexion.php";
 			Conexion::abrirConexion();
@@ -9,7 +8,6 @@
 			$queryData = array();
 			//variable que da formato como un json
 			$objectReturn = new stdClass();
-
 			try {
 				$fetchData = Conexion::obtenerConexion()->prepare($queryToExecute);
             	$fetchData->execute();
@@ -47,4 +45,4 @@
 			}
 		}
 	}
- ?>
+?>
